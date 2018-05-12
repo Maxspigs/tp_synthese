@@ -10,13 +10,14 @@ class Noeud
   {
     private :
       string valeur;
-      vector<Noeud> *enfants;
+      vector<Noeud> enfants;
     
     public :
 
     Noeud(string val);
     
     vector<Noeud> getEnfants();
+    void addEnfant(Noeud *n);
     string getValeur();
   };
 
