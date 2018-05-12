@@ -25,7 +25,9 @@ int ArbreBin::insere_dans_dict(string mot){
 }
 
 ArbreBin::ArbreBin(vector<string> v){
-	this->racine = new Noeud(v.at(0));
+	for (std::vector<string>::iterator i = v.begin(); i != v.end(); ++i){
+		this->insere_dans_dict(*i);
+	}
 }
 
 void ArbreBin::affiche(){
