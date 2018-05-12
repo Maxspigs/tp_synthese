@@ -16,9 +16,11 @@ class ArbreLex : public Arbre {
 
     ArbreLex();
 
-    //ArbreLex(vector<string> v);
+    ArbreLex(vector<string> mots);
+    
+    ArbreLex(string racine);
 
-    int insere_dans_dict(string);
+    int insere_dans_dict(string mot);
 
     void parcours_le_dict();
 

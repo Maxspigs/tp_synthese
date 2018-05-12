@@ -3,11 +3,22 @@
 ArbreLex::ArbreLex(){
 	this->racine = 0;
 }
-/*
-ArbreLex::ArbreLex(vector<string> v){
 
+ArbreLex::ArbreLex(vector<string> mots){
+    this->racine = new Noeud("!");
+    /*
+    for (auto i : mots) {
+       this->racine = new ArbreLex(i.substr(i,1));
+       
+       PTRdeNOEUD racine = noeud(’!’, NULL, NULL);
+    }
+    */
 }
-*/
+
+ArbreLex::ArbreLex(string racine){
+    this->racine = new Noeud(racine);
+}
+
 void ArbreLex::affiche(){
 
 }
@@ -15,16 +26,22 @@ void ArbreLex::affiche(){
 bool ArbreLex::estVide(){
 	return this->racine == 0 ? true : false;
 }
-int ArbreLex::insere_dans_dict(string mot){
-	return 0;
+
+void ArbreLex::effaceArbre(){
+    
 }
+ 
+int ArbreLex::insere_dans_dict(string mot){
+    for (int i = 0; i < mot.length(); i++) {
+         Noeud *nouveauNoeud = new Noeud(mot.substr(i,1));
+         this->racine->addEnfant(nouveauNoeud);
+         //cout << "test -> " << mot.substr(i,1) << endl;
+    }
+}
+ 
 /*
- void effaceArbre(){
-
- }
-
 // Fonction qui retourne un vecteur qui contient les string provenant du fichier.
-vector<string> lireFichierInitial(string filename) {
+vector<string> ArbreLex::lecture(string filename) {
 	ifstream file; // fichier sans être ouvert
 	file.open(filename); // on tente d'ouvrir le fichier
 	if (!file.is_open()) { // Si le fichier n'est pas ouvert
