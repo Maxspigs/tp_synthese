@@ -4,11 +4,13 @@
 #include "noeud.hpp"
 
 class Arbre {
-
-    Noeud* noeud;
-    // Sert à obliger les enfants d'implanter affiche avant de compiler.
+private:
+   	// Sert à obliger les enfants d'implanter affiche avant de compiler.
+public:
+    Arbre(){};
+    Arbre(vector<string>){};
+    Noeud* racine;
     virtual void affiche()=0;
-
 };
 
 #endif

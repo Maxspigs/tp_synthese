@@ -5,15 +5,9 @@
 #include <vector>
 
 class ArbreBin : public Arbre {
-
-    Noeud* racine;
-
+public:
     ArbreBin();
-
-    ArbreBin(vector<string> v);
-
+    ArbreBin(vector<string>);
     void affiche();
-
 };
-
 #endif

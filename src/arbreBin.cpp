@@ -5,13 +5,9 @@ ArbreBin::ArbreBin(){
 }
 
 ArbreBin::ArbreBin(vector<string> v){
-	/**
-    for (auto it = v.begin(); it != v.end(); it++) {
-        
-    }
-    **/
+	//this->racine = new Noeud(v.at(0));
 }
 
 void ArbreBin::affiche(){
-    
+    //std::cout<< "Toto" << std::endl;
 }
