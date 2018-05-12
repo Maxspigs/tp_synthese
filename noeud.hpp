@@ -2,7 +2,7 @@
   #define NOEUD_HPP
   
 #include <iostream>
-#include ".\noeud.hpp"
+#include "noeud.hpp"
 
 using namespace std;
 
