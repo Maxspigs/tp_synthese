@@ -13,6 +13,7 @@ int main(){
     v1.push_back("titi");
     Noeud *n2 = new Noeud("toto");
     ArbreBin *a1 = new ArbreBin(v1);
+    a1->insere_dans_dict("tutu");
    	a1->affiche();
     ArbreLex *dictionnaire = new ArbreLex();
     
