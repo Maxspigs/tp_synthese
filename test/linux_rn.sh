@@ -1,4 +1,4 @@
 #!/bin/bash
-g++ -o start main.cpp noeud.cpp
+g++ -o ../bin/start main.cpp ../include/* ../src/*
 echo "Program compiled, starting now..."
-./start
+../bin/start

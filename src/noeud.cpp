@@ -1,4 +1,4 @@
-#include "noeud.hpp"
+#include "../include/noeud.hpp"
 
 
 Noeud::Noeud(char lettre, Noeud *parent, Noeud *fils , Noeud *frere){
