@@ -11,6 +11,7 @@ public:
     Arbre(vector<string>){};
     Noeud* racine;
     virtual void affiche()=0;
+    virtual int insere_dans_dict(string)=0;
 };
 
 #endif

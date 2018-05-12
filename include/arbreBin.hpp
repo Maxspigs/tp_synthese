@@ -5,9 +5,11 @@
 #include <vector>
 
 class ArbreBin : public Arbre {
+private:
 public:
     ArbreBin();
     ArbreBin(vector<string>);
     void affiche();
+    int insere_dans_dict(string);
 };
 #endif

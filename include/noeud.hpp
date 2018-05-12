@@ -10,15 +10,16 @@ class Noeud
   {
     private :
       string valeur;
-      vector<Noeud> enfants;
     
     public :
 
     Noeud(string val);
-    
-    vector<Noeud> getEnfants();
+    vector<Noeud> enfants;
     void addEnfant(Noeud *n);
     string getValeur();
+    bool operator<(const Noeud &n);
+    bool operator>(const Noeud &n);
+    bool operator==(const Noeud &n);
   };
 
 #endif

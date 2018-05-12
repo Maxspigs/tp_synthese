@@ -20,11 +20,19 @@ Noeud::Noeud(string val){
 void Noeud::addEnfant(Noeud *n){
 	this->enfants.push_back(*n);
 }
-//Fonction d'accès aux noeuds enfants
-vector<Noeud> Noeud::getEnfants(){
-	return this->enfants;
-}
 //Fonction d'accès à la valeur du noeud
 string Noeud::getValeur(){
 	return this->valeur;
+}
+
+bool Noeud::operator<(const Noeud &n){
+	return this->valeur < n.valeur;
+}
+
+bool Noeud::operator>(const Noeud &n){
+	return this->valeur > n.valeur;
+}
+
+bool Noeud::operator==(const Noeud &n){
+	return this->valeur == n.valeur;
 }

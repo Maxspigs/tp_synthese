@@ -15,6 +15,9 @@ void ArbreLex::affiche(){
 bool ArbreLex::estVide(){
 	return this->racine == 0 ? true : false;
 }
+int ArbreLex::insere_dans_dict(string mot){
+	return 0;
+}
 /*
  void effaceArbre(){
 

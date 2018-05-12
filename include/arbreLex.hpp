@@ -18,7 +18,7 @@ class ArbreLex : public Arbre {
 
     //ArbreLex(vector<string> v);
 
-    void insere_dans_dict();
+    int insere_dans_dict(string);
 
     void parcours_le_dict();
 
