@@ -1,4 +1,4 @@
-#include "arbreLex.hpp"
+#include "../include/arbreLex.hpp"
 
 ArbreLex::ArbreLex(){
 	this->racine = 0;
@@ -11,11 +11,11 @@ ArbreLex::ArbreLex(vector<string> v){
 void ArbreLex::affiche(){
 
 }
-/*
+
 bool ArbreLex::estVide(){
 	return this->racine == 0 ? true : false;
 }
-
+/*
  void effaceArbre(){
 
  }
