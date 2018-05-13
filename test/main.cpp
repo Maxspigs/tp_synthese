@@ -14,10 +14,9 @@ int main(){
     v1.push_back("gogo");
     v1.push_back("gaga");
     v1.push_back("gigi");
-    Noeud *n2 = new Noeud("toto");
-    ArbreBin *a1 = new ArbreBin(v1);
+    //ArbreBin *a1 = new ArbreBin(v1);
     //a1->insere_dans_dict(*n2);
-   	a1->affiche();
+   	//a1->affiche();
     ArbreLex *dictionnaire = new ArbreLex("!");
     
     cout << "test " << dictionnaire->racine->getValeur() << endl;

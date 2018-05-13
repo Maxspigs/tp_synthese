@@ -13,11 +13,13 @@ void Noeud::afficheValeur(){
 }
 **/
 //Constructeur
+Noeud::Noeud(int *i){
+	this->valeur = "";
+	*this->compteurBin = 0;
+}
 Noeud::Noeud(string val){
 	this->valeur = val;
-}
-Noeud::Noeud(){
-	this->valeur = "";
+	*this->compteurBin++;
 }
 //N'effectue aucune vérification sur l'ordre des enfants
 void Noeud::addEnfant(Noeud *n){
@@ -29,11 +31,16 @@ string Noeud::getValeur(){
 }
 //Mindfuck
 void Noeud::afficheNoeud(){
-	std::cout << this->valeur << " {";
+	if(this->valeur == ""){
+		std::cout << "RACINE" << " {";
+	}else{
+		std::cout << this->valeur << " {";
+	}
 	for(int i = 0; i < this->enfants.size(); i++){
 		this->enfants.at(i).afficheNoeud();
+		cout << " " << endl; 
 	}
-	std::cout << "}," << endl;
+	std::cout << "}";
 }
 
 string Noeud::operator*(){

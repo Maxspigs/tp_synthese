@@ -12,8 +12,9 @@ class Noeud
       string valeur;
     
     public :
-
+    int *compteurBin;
     Noeud(string val);
+    Noeud(int *i);
     vector<Noeud> enfants;
     void addEnfant(Noeud *n);
     void afficheNoeud();
