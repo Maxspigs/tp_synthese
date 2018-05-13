@@ -3,8 +3,10 @@
     C'est un programme qui provient du C et on doit le modifier pour le rendre C++ compatible.
     Il faut transformer ce programme en orienté objet.
 */
-#include <stdio .h>
-#include <stdlib .h>
+#include <iostream>
+#include <stack>
+
+using namespace std;
 
 typedef struct noeud
 {
@@ -20,8 +22,8 @@ static struct
 
 PTRdeNOEUD noeud(char lettre, PTRdeNOEUD fils, PTRdeNOEUD frere)
 {
-    PTRdeNOEUD p = (PTRdeNOEUD)(malloc(sizeof(UN_NOEUD)));
-    assert(p != NULL);
+    //PTRdeNOEUD p = (PTRdeNOEUD)(malloc(sizeof(UN_NOEUD)));
+    PTRdeNOEUD p = new UN_NOEUD();
     p->lettre = lettre;
     p->fils = fils;
     p->frere = frere;
@@ -42,7 +44,7 @@ int insere_dans_dict(const char mot[], PTRdeNOEUD ascendant)
         }
         if (pc != NULL && pc->lettre == mot[i])
         {
-            if (mot[i] == ’\0 ’)
+            if (mot[i] == '\0')
                 return 1; /* le mot existait */
             ascendant = pc;
         }
@@ -53,7 +55,7 @@ int insere_dans_dict(const char mot[], PTRdeNOEUD ascendant)
                 pr->frere = pc;
             else
                 ascendant->fils = pc;
-            while (mot[i] != ’\0 ’)
+            while (mot[i] != '\0')
             {
                 pc->fils = noeud(mot[++i], NULL, NULL);
                 pc = pc->fils;
@@ -61,36 +63,39 @@ int insere_dans_dict(const char mot[], PTRdeNOEUD ascendant)
             return 0; /* le mot est nouveau */
         }
     }
-    4
+    
 }
 void parcours_le_dict(PTRdeNOEUD arbre)
 {
     PTRdeNOEUD p;
     pile.lettres[pile.n++] = arbre->lettre;
-    if (arbre->lettre == ’\0 ’)
+    if (arbre->lettre == '\0')
         printf("%s\n", pile.lettres + 1);
     else
         for (p = arbre->fils; p != NULL; p = p->frere)
             parcours_le_dict(p);
     pile.n--;
 }
+
 int main(int argc, char *argv[])
 {
     // ArbreLex a(’!’); ou ArbreBin a( NULL ); en C++
-    PTRdeNOEUD racine = noeud(’!’, NULL, NULL);
-    insere_dans_dict(" face ", racine);
+    PTRdeNOEUD racine = noeud('!', NULL, NULL);
+    insere_dans_dict("face", racine);
     insere_dans_dict("fac", racine);
     // a.insere_dans_dict ("donc"); en C++
-    insere_dans_dict(" donc ", racine);
-    insere_dans_dict(" dons ", racine);
+    insere_dans_dict("donc", racine);
+    insere_dans_dict("dons", racine);
     insere_dans_dict("fou", racine);
     pile.n = 0;
     //a.parcours_le_dict(); en C++
+    cout << "Début du parcours" << endl;
     parcours_le_dict(racine);
-    insere_dans_dict(" dont ", racine);
-    insere_dans_dict(" faim ", racine);
-    insere_dans_dict(" fais ", racine);
+    insere_dans_dict("dont", racine);
+    insere_dans_dict("faim", racine);
+    insere_dans_dict("fais", racine);
     insere_dans_dict("don", racine);
     pile.n = 0;
+    cout << "Début du parcours 2e" << endl;
     parcours_le_dict(racine);
 }
