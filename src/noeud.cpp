@@ -16,12 +16,27 @@ void Noeud::afficheValeur(){
 Noeud::Noeud(string val){
 	this->valeur = val;
 }
+Noeud::Noeud(){
+	this->valeur = "";
+}
 //N'effectue aucune vérification sur l'ordre des enfants
 void Noeud::addEnfant(Noeud *n){
 	this->enfants.push_back(*n);
 }
 //Fonction d'accès à la valeur du noeud
 string Noeud::getValeur(){
+	return this->valeur;
+}
+//Mindfuck
+void Noeud::afficheNoeud(){
+	std::cout << this->valeur << " {";
+	for(int i = 0; i < this->enfants.size(); i++){
+		this->enfants.at(i).afficheNoeud();
+	}
+	std::cout << "}," << endl;
+}
+
+string Noeud::operator*(){
 	return this->valeur;
 }
 
