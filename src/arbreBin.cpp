@@ -1,58 +1,128 @@
 #include "../include/arbreBin.hpp"
+#include <fstream>
 #include <algorithm>
+#include <iostream>
 
+using namespace std;
+inline bool ArbreBin::contient(string mot){return this->parcours_le_dict(mot) != NULL;};
+inline bool ArbreBin::estVide(){return this->compteurMots == 0;};
 ArbreBin::ArbreBin(){
-    this->racine = new Noeud(NULL);
+	racine = new NoeudBin();
 }
 
 ArbreBin::ArbreBin(vector<string> v){
-	this->racine = new Noeud(NULL);
-	this->racine->afficheNoeud();
-	for (std::vector<string>::iterator i = v.begin(); i != v.end(); ++i){
-		std::cout << "tentative d'ajout du mot " << *i << std::endl;
-		this->insere_dans_dict(*i);
-		this->racine->afficheNoeud();
-			std::cout << "Nombre de noeuds dans l'arbre: " << *this->racine->compteurBin << std::endl;
-
-		std::cout << " " << endl;
+	int taille = v.size();
+	if(taille > 0){
+		racine = new NoeudBin(v.at(0));
+		this->compteurMots++;
+		for (vector<string>::iterator i = v.begin() + 1; i != v.end(); ++i)	{
+			this->insere_dans_dict(*i);
+		}
 	}
-	std::cout << "Nombre de noeuds dans l'arbre: " << this->racine->compteurBin << std::endl;
+	else{
+		racine = new NoeudBin();
+	}
 }
 
+//Insertion préfixe
 int ArbreBin::insere_dans_dict(string mot){
-	Noeud *nNoeud = new Noeud(mot);
-	Noeud *tmp = this->racine;
-	Noeud *mCourrant = this->racine;
-	if(mCourrant->enfants.size() == 1 || mCourrant->enfants.size() == 0){
-		std::cout << "Première condition vérifiée..." << std::endl;
-		std::cout << "Racine = " << this->racine->getValeur() << std::endl;
-		mCourrant->addEnfant(nNoeud);sort(mCourrant->enfants.begin(), mCourrant->enfants.end());
+	NoeudBin *nouvMot = new NoeudBin(mot);
+	if(racine->valeur == ""){
+		racine = nouvMot;
+		this->compteurMots++;
 		return 1;
-	}else{
-		std::cout << "Seconde condition vérifiée...";
-		while(mCourrant->enfants.size() == 2){
-			mot > *mCourrant->enfants.at(1) ? *mCourrant = mCourrant->enfants.at(1) : *mCourrant = mCourrant->enfants.at(0);	
-			std::cout << "mot sélectionné: " << mCourrant->getValeur() << endl;
-		}
-		if(mCourrant->enfants.size() == 1 || mCourrant->enfants.size() == 0){
-			std::cout << "Troisieme condition vérifiée...Courant = " << mCourrant->getValeur() << " ;" << endl;
-			std::cout << "Racine = " << this->racine->getValeur() << endl;
-			mCourrant->addEnfant(nNoeud);
-			sort(mCourrant->enfants.begin(), mCourrant->enfants.end());
-			*this->racine = *tmp;
-			std::cout << "woo"<< endl;
-			return 1;
+	}
+	if(!this->contient(mot)){
+		NoeudBin *nCourrant;
+		nCourrant = racine;
+		while(true){
+			if(mot < nCourrant->valeur){
+				if(nCourrant->leftChild == NULL){
+					nCourrant->setLeftChild(nouvMot);
+					this->compteurMots++;
+					return 1;
+				}
+				else{
+					nCourrant = nCourrant->leftChild;
+				}
+			}
+			else{
+				if(nCourrant->rightChild == NULL){
+					nCourrant->setRightChild(nouvMot);
+					this->compteurMots++;
+					return 1;
+				}else{
+					nCourrant = nCourrant->rightChild;
+				}
+			}
 		}
 	}
-	std::cout << "no action detected..." << std::endl;
+	return 0;
+}
+
+vector<string> ArbreBin::getAllMots(){
+	vector<string> mots;
+	if(racine->valeur != ""){
+		mots = racine->getAll();
+	}
+	sort(mots.begin(),mots.end());
+	return mots;
+}
+
+NoeudBin* ArbreBin::parcours_le_dict(string mot){
+	if(racine->valeur != ""){
+		NoeudBin *nCourrant;
+		nCourrant = racine;
+		int compteur = 0;
+		while(true){
+			compteur++;
+			if(nCourrant->valeur == mot){
+				return nCourrant;
+			}
+			else if(nCourrant->leftChild != NULL && nCourrant->leftChild->valeur < mot){
+				nCourrant = nCourrant->leftChild;
+			}
+			else if(nCourrant->rightChild != NULL && nCourrant->rightChild->valeur > mot){
+				nCourrant = nCourrant->rightChild;
+			}
+			else{
+				return NULL;
+			}
+		}
+	}
+	return NULL;
+}
+
+void ArbreBin::sauvegarde(string fichier){
+	ofstream ostream(fichier);
+	vector<string> vecTmp = this->getAllMots();
+	for (vector<string>::iterator i = vecTmp.begin(); i != vecTmp.end(); ++i) {
+		string stmp = *i + ";";
+		ostream << stmp;
+	}
+	ostream.close();
+}
+
+void ArbreBin::lecture(string fichier){
+	ifstream istream(fichier);
+	string stmp;
+	int idx = 0;
+	while(istream >> stmp){
+		for(int i = 0; i < stmp.length(); ++i){
+			if (stmp.at(i) == ';'){
+				this->insere_dans_dict(stmp.substr(idx,i-idx));
+				idx = i+1;
+			}
+		}
+	}
+}
+
+int ArbreBin::getNbMots(){
+	return this->compteurMots;
 }
 
 void ArbreBin::affiche(){
-    if(this->racine != NULL){
-    	std::cout << "Début:" << std::endl;
-    	this->racine->afficheNoeud();
-    	std::cout << "Fin!" << std::endl;
-    }else{
-    	std::cout << "Arbre vide..." << std::endl;
-    }
+	if(racine->valeur != ""){
+		racine->afficheNoeud();
+	}
 }
