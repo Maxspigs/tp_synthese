@@ -19,7 +19,9 @@ public:
     vector<string> getAllMots();
     void sauvegarde(string);
     void lecture(string);
-    inline bool contient(string);
+    void afficherMotsLongueur(int);
+    void afficherMotsPrefixe(string);
+    inline bool appartient(string);
     inline bool estVide();
 };
 #endif

@@ -4,7 +4,7 @@
 #include <iostream>
 
 using namespace std;
-inline bool ArbreBin::contient(string mot){return this->parcours_le_dict(mot) != NULL;};
+inline bool ArbreBin::appartient(string mot){return this->parcours_le_dict(mot) != NULL;};
 inline bool ArbreBin::estVide(){return this->compteurMots == 0;};
 ArbreBin::ArbreBin(){
 	racine = new NoeudBin();
@@ -32,7 +32,7 @@ int ArbreBin::insere_dans_dict(string mot){
 		this->compteurMots++;
 		return 1;
 	}
-	if(!this->contient(mot)){
+	if(!this->appartient(mot)){
 		NoeudBin *nCourrant;
 		nCourrant = racine;
 		while(true){
@@ -115,6 +115,29 @@ void ArbreBin::lecture(string fichier){
 			}
 		}
 	}
+}
+
+void ArbreBin::afficherMotsLongueur(int longueur){
+	cout << "Mots de longueur " << longueur << " :" << endl;
+	vector<string> mots = this->getAllMots();
+	for (vector<string>::iterator i = mots.begin(); i != mots.end(); ++i) {
+		if(i->length() == longueur){
+			cout << *i << " ";
+		}
+	}
+	cout << " " << endl;
+	cout << "Fin" << endl;
+}
+void ArbreBin::afficherMotsPrefixe(string prefixe){
+	cout << "Mots avec le préfixe " << prefixe << ":";
+	vector<string> mots = this->getAllMots();
+	for (vector<string>::iterator i = mots.begin(); i != mots.end(); ++i) {
+		if(i->substr(0,prefixe.length()) == prefixe){
+			cout << *i << " ";
+		}
+	}
+	cout << " " << endl;
+	cout << "Fin" << endl;
 }
 
 int ArbreBin::getNbMots(){

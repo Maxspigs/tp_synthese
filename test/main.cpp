@@ -42,6 +42,9 @@ int main(){
     {
         cout << "Mot:" << *i << endl;
     }
+    a2->afficherMotsLongueur(4);
+    a2->afficherMotsPrefixe("t");
+    a2->afficherMotsPrefixe("to");
     ArbreLex *dictionnaire = new ArbreLex("!");
     
     cout << "test " << dictionnaire->racine->getValeur() << endl;

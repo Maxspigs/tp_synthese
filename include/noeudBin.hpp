@@ -10,8 +10,6 @@ struct NoeudBin {
 		leftChild = NULL;
 		rightChild = NULL;
 	};
-	~NoeudBin(){
-	}
 	void setLeftChild(NoeudBin *n){
 		leftChild = n;
 	};
