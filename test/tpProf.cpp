@@ -22,14 +22,13 @@ static struct
 
 PTRdeNOEUD noeud(char lettre, PTRdeNOEUD fils, PTRdeNOEUD frere)
 {
-    //PTRdeNOEUD p = (PTRdeNOEUD)(malloc(sizeof(UN_NOEUD)));
     PTRdeNOEUD p = new UN_NOEUD();
     p->lettre = lettre;
     p->fils = fils;
     p->frere = frere;
     return p;
 }
-int insere_dans_dict(const char mot[], PTRdeNOEUD ascendant)
+int insere_dans_dict(const string mot, PTRdeNOEUD ascendant)
 {
     PTRdeNOEUD pr, pc;
     int i;
@@ -65,10 +64,25 @@ int insere_dans_dict(const char mot[], PTRdeNOEUD ascendant)
     }
     
 }
+/*
 void parcours_le_dict(PTRdeNOEUD arbre)
 {
     PTRdeNOEUD p;
     pile.lettres[pile.n++] = arbre->lettre;
+    if (arbre->lettre == '\0')
+        printf("%s\n", pile.lettres + 1);
+    else
+        for (p = arbre->fils; p != NULL; p = p->frere)
+            parcours_le_dict(p);
+    pile.n--;
+}
+*/
+void parcours_le_dict(PTRdeNOEUD arbre)
+{
+    PTRdeNOEUD p;
+    cout << " valeur -> " << pile.lettres[pile.n];
+    pile.lettres[pile.n++] = arbre->lettre;
+    cout << " valeur -> " << pile.lettres[pile.n];
     if (arbre->lettre == '\0')
         printf("%s\n", pile.lettres + 1);
     else
