@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "../include/noeudLex.hpp"
 
 using namespace std;
 
